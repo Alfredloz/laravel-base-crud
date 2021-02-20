@@ -2,9 +2,10 @@
 @section('title')
     Posts
 @endsection
-
 @section('content')
     <h1>All posts</h1>
+    <a href="{{ route('post.create') }}" class="btn btn-red">Insert new Post</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -24,7 +25,11 @@
                 <td>{{$post->body}}</td>
                 <td>{{$post->created_at}}</td>
                 <td>{{$post->updated_at}}</td>
-                <td>VIew | Edit | Cancel</td>
+                <td>
+                    <a href="{{ route('post.show', $post) }}" class="btn">View</a>
+                    <a href="" class="btn">Edit</a>
+                    <a href="" class="btn">Cancella</a>
+                </td>
             </tr>
             
             @endforeach
