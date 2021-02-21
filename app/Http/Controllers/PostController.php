@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts= Post::all();
+        $posts= Post::latest()->get();
         return view('post.index', compact('posts'));
     }
 
@@ -36,7 +36,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);
+        $data = $request->all();
+        $postNew = new Post;
+        $postNew->title = $data['title'];
+        $postNew->body = $data['body'];
+        $postNew->save();
+
+        $post = Post::orderBy('id', 'desc')->first();
+
+        return redirect()->route('post.show', $post);
     }
 
     /**
@@ -59,7 +71,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -71,7 +83,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $post->update($data);
+        return redirect()->route('post.show', $post);
     }
 
     /**
@@ -82,6 +96,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index');
     }
 }

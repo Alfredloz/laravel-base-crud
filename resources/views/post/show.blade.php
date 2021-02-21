@@ -3,7 +3,7 @@
     Posts
 @endsection
 @section('content')
-    <h1>All posts</h1>
+    <h1>Post number: {{$post->id}} </h1>
     <a href="{{ route('post.index') }}" class="btn btn-red">Torna ai post</a>
 
     <h2>{{$post->title}}</h2>

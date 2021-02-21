@@ -27,8 +27,12 @@
                 <td>{{$post->updated_at}}</td>
                 <td>
                     <a href="{{ route('post.show', $post) }}" class="btn">View</a>
-                    <a href="" class="btn">Edit</a>
-                    <a href="" class="btn">Cancella</a>
+                    <a href=" {{ route('post.edit', $post) }}" class="btn">Edit</a>
+                    <form action="{{ route('post.destroy', $post) }} " method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Cancella" class="btn">    
+                    </form>
                 </td>
             </tr>
             
