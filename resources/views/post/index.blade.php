@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <h1>All posts</h1>
-    <a href="{{ route('post.create') }}" class="btn btn-red">Insert new Post</a>
+    <a href="{{ route('post.create') }}" class="btn btn-primary">Insert new Post</a>
 
     <table class="table">
         <thead>
@@ -22,16 +22,16 @@
             <tr>
                 <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
-                <td>{{$post->body}}</td>
+                <td style="display: block; max-width: 150px;" class=" text-truncate">{{$post->body}}</td>
                 <td>{{$post->created_at}}</td>
                 <td>{{$post->updated_at}}</td>
                 <td>
-                    <a href="{{ route('post.show', $post) }}" class="btn">View</a>
-                    <a href=" {{ route('post.edit', $post) }}" class="btn">Edit</a>
+                    <a href="{{ route('post.show', $post) }}" class="btn btn-info btn-block">View</a>
+                    <a href=" {{ route('post.edit', $post) }}" class="btn btn-warning btn-block">Edit</a>
                     <form action="{{ route('post.destroy', $post) }} " method="POST">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" value="Cancella" class="btn">    
+                        <input type="submit" value="Cancella" class="btn btn-danger btn-block">    
                     </form>
                 </td>
             </tr>
